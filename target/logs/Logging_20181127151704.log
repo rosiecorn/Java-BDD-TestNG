@@ -1,0 +1,6 @@
+15:16:53 [main] INFO  runner.TestRunner -  ================================Start Cucumber Suite Class=====================================================
+15:16:53 [main] INFO  runner.TestRunner - ------Start Scenario: Verify that user could login with valid user name and pass ---------------------
+15:16:59 [main] ERROR assertion.Asserts - [Assert Fail] - error expected [2] but found [1]
+15:16:59 [main] ERROR assertion.Asserts - [Assert Fail] - error expected [3] but found [1]
+15:17:02 [main] INFO  runner.TestRunner - ------End Scenario: Verify that user could login with valid user name and pass -----------------------
+15:17:04 [main] INFO  runner.TestRunner - =================================End Cucumber Suite Class========================================================
