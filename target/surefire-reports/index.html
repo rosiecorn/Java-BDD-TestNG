@@ -102,7 +102,7 @@
                     <div class="method-list-content failed suite-Surefire_suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="runner.TestRunner" hash-for-method="feature(FE001 - Verify Login functionality)">feature(FE001 - Verify Login functionality)</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="runner.TestRunner" hash-for-method="feature(BE001 - Verify Login functionality)">feature(BE001 - Verify Login functionality)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Surefire_suite -->
@@ -125,48 +125,18 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="feature(FE001 - Verify Login functionality)">
-                  </a> <!-- feature(FE001 - Verify Login functionality) -->
+                  <a name="feature(BE001 - Verify Login functionality)">
+                  </a> <!-- feature(BE001 - Verify Login functionality) -->
                   <span class="method-name">feature</span>
-                  <span class="parameters">(FE001 - Verify Login functionality)</span>
-                  <div class="stack-trace">java.lang.Throwable: Multiple failures (2)
-(1)assertion.VerificationError:error expected [2] but found [1]
-(2)assertion.VerificationError:error expected [3] but found [1]
-
-Failure 1 of 2
-assertion.VerificationError: error expected [2] but found [1]
-	at assertion.Asserts.verifyEquals(Asserts.java:19)
-	at stepDefs.LoginStep.login_Url(LoginStep.java:35)
-	at cucumber.runtime.Utils$1.call(Utils.java:40)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:34)
-	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
-	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
-	at cucumber.runtime.Runtime.runStep(Runtime.java:300)
-	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
-	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
-	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
-	at cucumber.runtime.model.CucumberFeature.run(CucumberFeature.java:165)
-	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:63)
+                  <span class="parameters">(BE001 - Verify Login functionality)</span>
+                  <div class="stack-trace">cucumber.runtime.CucumberException: java.lang.NullPointerException
+	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:69)
 	at runner.TestRunner.feature(TestRunner.java:58)
-
-Failure 2 of 2
-assertion.VerificationError: error expected [3] but found [1]
-	at assertion.Asserts.verifyEquals(Asserts.java:19)
-	at stepDefs.LoginStep.login_Url(LoginStep.java:36)
-	at cucumber.runtime.Utils$1.call(Utils.java:40)
-	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
-	at cucumber.runtime.Utils.invoke(Utils.java:34)
-	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
-	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
-	at cucumber.runtime.Runtime.runStep(Runtime.java:300)
-	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
-	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
-	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
-	at cucumber.runtime.model.CucumberFeature.run(CucumberFeature.java:165)
-	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:63)
-	at runner.TestRunner.feature(TestRunner.java:58)
-... Removed 74 stack frames
+Caused by: java.lang.NullPointerException
+	at pages.BELogin.selectAllBooking(BELogin.java:47)
+	at stepDefs.BELoginStep.backend_Login_successfully(BELoginStep.java:42)
+	at ✽.Then BackEnd Login successfully(BELogin.feature:10)
+... Removed 29 stack frames
 </div> <!-- stack-trace -->
                   <em>
 (Runs Cucumber Feature)                  </em>
@@ -237,12 +207,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'feature')
 data.setCell(0, 2, 'runner.TestRunner')
-data.setCell(0, 3, 9466);
+data.setCell(0, 3, 46567);
 window.suiteTableData['Surefire_suite']= { tableData: data, tableDiv: 'times-div-Surefire_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 9 seconds</span>
+              <span class="suite-total-time">Total running time: 46 seconds</span>
               <div id="times-div-Surefire_suite">
               </div> <!-- times-div-Surefire_suite -->
             </div> <!-- times-div -->
@@ -276,12 +246,12 @@ return data;
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">feature(FE001 - Verify Login functionality)</span>
-                <span class="method-start">6016 ms</span>
+                <span class="method-name">feature(BE001 - Verify Login functionality)</span>
+                <span class="method-start">5689 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownClass</span>
-                <span class="method-start">15490 ms</span>
+                <span class="method-start">52266 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

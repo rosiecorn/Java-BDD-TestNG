@@ -16,9 +16,9 @@ public class TestMethodListener implements IInvokedMethodListener {
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 
 
-        Logger log = LogManager.getLogger(TestMethodListener.class);
+       // Logger log = LogManager.getLogger(TestMethodListener.class);
 
-        log.info("Hong Testing...................");
+        //log.info("Hong Testing...................");
 
        // if(method.isTestMethod()){
 

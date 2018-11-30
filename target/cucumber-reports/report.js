@@ -1,19 +1,19 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("Login.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("BELogin.feature");
 formatter.feature({
   "line": 2,
-  "name": "FE001 - Verify Login functionality",
+  "name": "BE001 - Verify Login functionality",
   "description": "",
-  "id": "fe001---verify-login-functionality",
+  "id": "be001---verify-login-functionality",
   "keyword": "Feature",
   "tags": [
     {
       "line": 1,
-      "name": "@FrondEnd"
+      "name": "@BackEnd"
     }
   ]
 });
 formatter.before({
-  "duration": 621827,
+  "duration": 449185,
   "status": "passed"
 });
 formatter.scenario({
@@ -26,7 +26,7 @@ formatter.scenario({
   "line": 6,
   "name": "Verify that user could login with valid user name and pass",
   "description": "",
-  "id": "fe001---verify-login-functionality;verify-that-user-could-login-with-valid-user-name-and-pass",
+  "id": "be001---verify-login-functionality;verify-that-user-could-login-with-valid-user-name-and-pass",
   "type": "scenario",
   "keyword": "Scenario",
   "tags": [
@@ -42,64 +42,64 @@ formatter.scenario({
 });
 formatter.step({
   "line": 7,
-  "name": "Login Url",
+  "name": "Login BackEnd Url",
   "keyword": "Given "
 });
 formatter.step({
   "line": 8,
-  "name": "Give user name \"user@phptravels.com\" and pass \"demouser\"",
+  "name": "Provide user name \"admin@phptravels.com\" and pass \"demoadmin\"",
   "keyword": "And "
 });
 formatter.step({
   "line": 9,
-  "name": "Click Login button",
+  "name": "Click BackEnd Login button",
   "keyword": "And "
 });
 formatter.step({
   "line": 10,
-  "name": "Login successfully",
+  "name": "BackEnd Login successfully",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "LoginStep.login_Url()"
+  "location": "BELoginStep.loginBackEndUrl()"
 });
 formatter.result({
-  "duration": 5829084772,
+  "duration": 5424729847,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "user@phptravels.com",
-      "offset": 16
+      "val": "admin@phptravels.com",
+      "offset": 19
     },
     {
-      "val": "demouser",
-      "offset": 47
+      "val": "demoadmin",
+      "offset": 51
     }
   ],
-  "location": "LoginStep.give_user_name_and_pass(String,String)"
+  "location": "BELoginStep.provide_user_name_and_pass(String,String)"
 });
 formatter.result({
-  "duration": 429030490,
+  "duration": 898444997,
   "status": "passed"
 });
 formatter.match({
-  "location": "LoginStep.click_Login_button()"
+  "location": "BELoginStep.click_BackEnd_Login_button()"
 });
 formatter.result({
-  "duration": 3170557697,
+  "duration": 3127085877,
   "status": "passed"
 });
 formatter.match({
-  "location": "LoginStep.login_successfully()"
+  "location": "BELoginStep.backend_Login_successfully()"
 });
 formatter.result({
-  "duration": 62024,
+  "duration": 33020004354,
   "status": "passed"
 });
 formatter.after({
-  "duration": 928791,
+  "duration": 1239704,
   "status": "passed"
 });
 });

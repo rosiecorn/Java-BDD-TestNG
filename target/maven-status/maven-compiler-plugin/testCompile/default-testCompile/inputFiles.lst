@@ -1,5 +1,7 @@
 D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\bases\BasePage.java
-D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\stepDefs\LoginStep.java
+D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\stepDefs\FELoginStep.java
+D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\stepDefs\BELoginStep.java
+D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\pages\BELogin.java
 D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\bases\BaseTest.java
 D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\runner\TestRunner.java
-D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\pages\Login.java
+D:\Projects\BabySharks\Java-BDD-TestNG\src\test\java\pages\FELogin.java

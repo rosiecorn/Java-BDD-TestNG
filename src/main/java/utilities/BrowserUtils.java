@@ -70,6 +70,16 @@ public class BrowserUtils {
         exists.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(by)));
     }
 
+    public static void sleep(int timer)
+    {
+
+        try {
+            Thread.sleep(timer);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * click method using JavaScript API click
      *
@@ -104,6 +114,12 @@ public class BrowserUtils {
         return (Boolean) js.executeScript("return jQuery.active == 0");
     }
 
+    public static void scrollDown(WebDriver driver) {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        // This  will scroll down the page by  1000 pixel vertical
+        js.executeScript("window.scrollBy(0,1000)");
+    }
 
 
 }

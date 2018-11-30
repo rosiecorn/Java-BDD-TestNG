@@ -17,7 +17,7 @@ import org.testng.annotations.*;
         ,format = {"json:target/cucumber.json","html:/target/site/cucumber-pretty"}
         , plugin = {"pretty:target/cucumber-reports/cucumber.txt"
         ,"html:target/cucumber-reports"}
-        , tags = {"@FrondEnd"}
+        , tags = {"@BackEnd"}
 )
 
 @Listeners(TestMethodListener.class)

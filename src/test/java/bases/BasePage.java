@@ -2,6 +2,7 @@ package bases;
 
 import drivers.Driver;
 import elements.controller.*;
+import elements.controllerImpl.Element;
 import org.openqa.selenium.By;
 import utilities.BrowserUtils;
 
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
 
 import static utilities.Contants.SECOND_TIME_OUT;
@@ -44,6 +46,11 @@ public class BasePage {
         wait = new WebDriverWait(driver, SECOND_TIME_OUT);
     }
 
+    /**
+     * getElement - return list of webelement  *
+     * * @type Class
+     * * @locators locator
+     */
 
     public  <T> T getElement(Class<T> type, By locators) {
         try {
@@ -53,13 +60,41 @@ public class BasePage {
             return constructor.newInstance(wait.until(ExpectedConditions.visibilityOf(driver.findElement(locators))));
 
 
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    public  <T> T getElement(Class<T> type, WebElement element) {
+        try {
 
+            Constructor<T> constructor = type.getDeclaredConstructor(WebElement.class);
+
+            return constructor.newInstance(wait.until(ExpectedConditions.visibilityOf(element)));
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * getListElement - return list of webelement  *
+     * * @type Class
+     * * @locators locator
+     */
+
+    public <T> List<T> getListElement (By locators) {
+
+       List<T>  elements = (List<T>) getElement(Element.class,locators).findElements(locators);
+
+        return  elements;
+
+    }
     /**
      * getTitle - method to return the title of the current page
      *

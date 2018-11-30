@@ -1,10 +1,10 @@
-@FrondEnd
-Feature: FE001 - Verify Login functionality
+@BackEnd
+Feature: BE001 - Verify Login functionality
 
   #-------------------------------------------------------------------------------
   @Priority=1 @ValidLogin
-  Scenario: Verify that user could login with valid user name and pass [90m# Login.feature:6[0m
-    [32mGiven [0m[32mLogin Url[0m                                                    [90m# LoginStep.login_Url()[0m
-    [32mAnd [0m[32mGive user name "[0m[32m[1muser@phptravels.com[0m[32m" and pass "[0m[32m[1mdemouser[0m[32m"[0m       [90m# LoginStep.give_user_name_and_pass(String,String)[0m
-    [32mAnd [0m[32mClick Login button[0m                                             [90m# LoginStep.click_Login_button()[0m
-    [32mThen [0m[32mLogin successfully[0m                                            [90m# LoginStep.login_successfully()[0m
+  Scenario: Verify that user could login with valid user name and pass [90m# BELogin.feature:6[0m
+    [32mGiven [0m[32mLogin BackEnd Url[0m                                            [90m# BELoginStep.loginBackEndUrl()[0m
+    [32mAnd [0m[32mProvide user name "[0m[32m[1madmin@phptravels.com[0m[32m" and pass "[0m[32m[1mdemoadmin[0m[32m"[0m  [90m# BELoginStep.provide_user_name_and_pass(String,String)[0m
+    [32mAnd [0m[32mClick BackEnd Login button[0m                                     [90m# BELoginStep.click_BackEnd_Login_button()[0m
+    [32mThen [0m[32mBackEnd Login successfully[0m                                    [90m# BELoginStep.backend_Login_successfully()[0m
