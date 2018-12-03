@@ -20,7 +20,7 @@ import static utilities.Contants.SECOND_TIME_OUT;
 
 public class BasePage {
 
-    public static WebDriver driver = null;
+    public WebDriver driver = null;
 
     private IElement element;
 
@@ -39,12 +39,15 @@ public class BasePage {
 
     public BasePage() {
 
-        if (this.driver==null)
-        {
+
+        if (this.driver == null) {
             this.driver = Driver.getInstance().getDriver();
         }
         wait = new WebDriverWait(driver, SECOND_TIME_OUT);
+
+
     }
+
 
     /**
      * getElement - return list of webelement  *
@@ -52,13 +55,13 @@ public class BasePage {
      * * @locators locator
      */
 
-    public  <T> T getElement(Class<T> type, By locators) {
+    public <T> T getElement(Class<T> type, By locators) {
         try {
 
+            // WebDriver driver =  Driver.getInstance().getDriver();
             Constructor<T> constructor = type.getDeclaredConstructor(WebElement.class);
 
             return constructor.newInstance(wait.until(ExpectedConditions.visibilityOf(driver.findElement(locators))));
-
 
 
         } catch (Exception e) {
@@ -67,13 +70,13 @@ public class BasePage {
         }
     }
 
-    public  <T> T getElement(Class<T> type, WebElement element) {
+    public <T> T getElement(Class<T> type, WebElement element) {
         try {
+
 
             Constructor<T> constructor = type.getDeclaredConstructor(WebElement.class);
 
             return constructor.newInstance(wait.until(ExpectedConditions.visibilityOf(element)));
-
 
 
         } catch (Exception e) {
@@ -88,22 +91,21 @@ public class BasePage {
      * * @locators locator
      */
 
-    public <T> List<T> getListElement (By locators) {
+    public <T> List<T> getListElement(By locators) {
 
-       List<T>  elements = (List<T>) getElement(Element.class,locators).findElements(locators);
+        List<T> elements = (List<T>) getElement(Element.class, locators).findElements(locators);
 
-        return  elements;
+        return elements;
 
     }
+
     /**
      * getTitle - method to return the title of the current page
      *
      * @throws Exception
      */
 
-    public String getTitle() throws Exception {
-        // WebDriver driver = Driver.getInstance().getDriver();
-
+    public String getTitle() {
         return driver.getTitle();
     }
 
@@ -116,15 +118,17 @@ public class BasePage {
      */
     public void openPage(String pageURL) {
 
+
         driver.manage().window().maximize();
         driver.navigate().to(pageURL);
 
         // wait for page download, sync.
         BrowserUtils.isPageReady(driver);
 
-       // BrowserUtils.waitForURL(pageURL,TIMEOUT_SECOND);
-
     }
 
+    public String getCurrentURL() {
+        return driver.getCurrentUrl();
+    }
 
 }

@@ -1,9 +1,12 @@
 package drivers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,9 +17,20 @@ public class Driver {
 
     private static Driver instance = null;
 
+
+    private Logger log = LogManager.getLogger(Driver.class);
+
     private static final int IMPLICIT_TIMEOUT = 0;
 
     private ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
+
+    private ThreadLocal<String> sessionId = new ThreadLocal<String>();
+
+    private ThreadLocal<String> sessionBrowser = new ThreadLocal<String>();
+
+    private ThreadLocal<String> sessionPlatform = new ThreadLocal<String>();
+
+    //private ThreadLocal<String> sessionVersion = new ThreadLocal<String>();
 
 
     // constructor
@@ -43,6 +57,7 @@ public class Driver {
      */
 
     public WebDriver getDriver() {
+       // return setDriver(getInstance().getDriver());
         return webDriver.get();
     }
 
@@ -53,16 +68,56 @@ public class Driver {
      */
 
     public WebDriver getCurrentDriver() {
+
         return getInstance().getDriver();
 
     }
 
-    // a method for allowing selenium to pause for a set amount of time
-    public void wait(int seconds) throws InterruptedException {
-        Thread.sleep(seconds * 1000);
+    /**
+     *  createDriver method to create create new WebDriver
+     * *
+     * * @param browser browerType
+     */
+
+    public WebDriver createDriver (String browser) {
+
+        WebDriver driver = null;
+
+        switch (browser) { // check our browser
+            case "firefox": {
+                System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/geckodriver.exe");
+                driver = new FirefoxDriver();
+                //webDriver.set(new FirefoxDriver());
+                break;
+            }
+            case "chrome": {
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+                driver = new ChromeDriver();
+                break;
+            }
+            case "ie": {
+                driver = new InternetExplorerDriver();
+                break;
+            }
+            // if our browser is not listed, throw an error
+            default: {
+                System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+                driver = new ChromeDriver();
+            }
+        }
+
+        return driver;
     }
 
-    public void setDriver(String browser) {
+    /**
+     * overloaded setDriver method to create specific WebDriver using thread sefe
+     * *
+     * * @param driver WebDriver instance to switch to
+     */
+    public WebDriver setDriver (String browser) {
+
+        String getPlatform = null;
+
         switch (browser) { // check our browser
             case "firefox": {
                 System.setProperty("webdriver.gecko.driver", "src/main/resources/drivers/geckodriver.exe");
@@ -84,6 +139,35 @@ public class Driver {
                 webDriver.set(new ChromeDriver());
             }
         }
+
+        return webDriver.get();
+    }
+    /**
+     * overloaded setDriver method to switch driver to specific WebDriver
+     * * if running concurrent drivers
+     * * @param driver WebDriver instance to switch to
+     */
+    public void setDriver(WebDriver driver) {
+
+        webDriver.set(driver);
+
+        sessionId.set(((RemoteWebDriver) webDriver.get()).getSessionId().toString());
+
+        sessionBrowser.set(((RemoteWebDriver) webDriver.get()).getCapabilities().getBrowserName());
+    }
+
+    /**
+     * getSessionId method gets the browser or mobile id  * of the active session  *  * @return String
+     */
+    public String getSessionId() {
+        return sessionId.get();
+    }
+
+    /**
+     * getSessionBrowser method gets the browser or mobile type  * of the active session  *  * @return String
+     */
+    public String getSessionBrowser() {
+        return sessionBrowser.get();
     }
 
     public void wait(double seconds) throws InterruptedException {
@@ -117,7 +201,9 @@ public class Driver {
      */
     public void closeDriver() {
         try {
-            getCurrentDriver().quit();
+
+            getDriver().quit();
+            webDriver.remove();
         } catch (Exception e) {         // do something    //
         }
     }

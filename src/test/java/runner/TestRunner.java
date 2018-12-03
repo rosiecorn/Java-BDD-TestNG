@@ -1,5 +1,6 @@
 package runner;
 
+import assertion.TestMethodErrorBuffer;
 import assertion.TestMethodListener;
 import cucumber.api.CucumberOptions;
 import cucumber.api.Scenario;
@@ -10,14 +11,16 @@ import cucumber.api.testng.TestNGCucumberRunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
+import cucumber.api.testng.PickleEventWrapper;
 
-//@RunWith(Cucumber.class)
+import static utilities.ScreenShot.takeScreenshot;
+
 @CucumberOptions(features = { "src/test/resources/features"}
-        ,glue = {"stepDefs", "runner"}
-        ,format = {"json:target/cucumber.json","html:/target/site/cucumber-pretty"}
+        ,glue = {"stepDefs","runner"}
         , plugin = {"pretty:target/cucumber-reports/cucumber.txt"
-        ,"html:target/cucumber-reports"}
-        , tags = {"@BackEnd"}
+        ,"html:target/cucumber-reports"
+        ,"json:target/cucumber.json"}
+        , tags = {"@FrondEnd,@BackEnd"}
 )
 
 @Listeners(TestMethodListener.class)
@@ -25,6 +28,7 @@ public class TestRunner {
 
     private TestNGCucumberRunner testNGCucumberRunner;
     private Logger log = LogManager.getLogger(TestRunner.class);
+
 
     @BeforeClass(alwaysRun = true)
     public void setUpClass() throws Exception {
@@ -35,33 +39,33 @@ public class TestRunner {
 
     @Before
     public void initializeTest(Scenario scenario){
-        // System.out.println("This will run before each scenario");
         log.info("------Start Scenario: " + scenario.getName() + " ---------------------");
     }
 
     @After
+
     public void embedScreenshot(Scenario scenario) {
-        //  System.out.println("This will run before each scenario");
+
         if (scenario.isFailed()) {
             try {
-                // Code to capture and embed images in test reports (if scenario fails)
+                 scenario.embed(takeScreenshot(),"image/png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         log.info("------End Scenario: " + scenario.getName() + " -----------------------");
     }
 
-    @Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
-    public void feature(CucumberFeatureWrapper cucumberFeature) {
-        testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
+    @Test(groups = "cucumber", description = "Runs Cucumber Scenarios", dataProvider = "scenarios")
+    public void scenario(PickleEventWrapper pickleEvent, CucumberFeatureWrapper cucumberFeature) throws Throwable {
+        testNGCucumberRunner.runScenario(pickleEvent.getPickleEvent());
     }
 
-    @DataProvider
-    public Object[][] features() {
-        return testNGCucumberRunner.provideFeatures();
+    @DataProvider()
+    public Object[][] scenarios() throws Exception {
+        return testNGCucumberRunner.provideScenarios();
     }
+
 
     @AfterClass(alwaysRun = true)
     public void tearDownClass() throws Exception {

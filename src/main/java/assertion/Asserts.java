@@ -1,10 +1,13 @@
 package assertion;
 
+import cucumber.api.Scenario;
+import drivers.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-
-
 
 public class Asserts {
 
@@ -14,9 +17,19 @@ public class Asserts {
 
         }
 
-        public static void verifyEquals(Object actual, Object expected, String message) {
+        public static void verifyEquals(Object actual, Object expected,String message) {
             try {
-                Assert.assertEquals(actual, expected, message);
+                Assert.assertEquals(actual, expected,message);
+            } catch (AssertionError e) {
+                log.error("[Assert Fail] - " + e.getMessage());
+                addToErrorBuffer(e);
+
+            }
+        }
+
+        public static void verifyEquals(Object actual, Object expected) {
+            try {
+                Assert.assertEquals(actual, expected,"");
             } catch (AssertionError e) {
                 log.error("[Assert Fail] - " + e.getMessage());
                 addToErrorBuffer(e);
@@ -32,6 +45,25 @@ public class Asserts {
                 addToErrorBuffer(e);
             }
         }
+
+        public static void verifyFalse(boolean condition) {
+            try{
+                Assert.assertFalse(condition, "");
+            }catch(AssertionError e){
+                log.error("[Assert Fail] - " + e.getMessage());
+                addToErrorBuffer(e);
+            }
+        }
+
+        public static void verifyNotEquals(Object actual1, Object actual2) {
+            try{
+                Assert.assertNotEquals(actual1,actual2,"");
+            }catch(AssertionError e){
+                log.error("[Assert Fail] - " + e.getMessage());
+                addToErrorBuffer(e);
+            }
+        }
+
         public static void verifyNotEquals(Object actual1, Object actual2, String message) {
             try{
                 Assert.assertNotEquals(actual1,actual2,message);
@@ -52,9 +84,17 @@ public class Asserts {
 
             TestMethodErrorBuffer.get().add(verificationError);
 
-        }catch(NullPointerException ex){
+        }catch(Exception ex){
 
             throw new RuntimeException("Please let TestNG know about " + TestMethodListener.class.getName() + " listener for verify statements to work. For more information go to http://testng.org/doc/documentation-main.html#testng-listeners");
+        }
+
+    }
+
+    public static void verifyAll() {
+
+        if (TestMethodErrorBuffer.get().size()>0) {
+            throw new RuntimeException(TestMethodErrorBuffer.get().toString());
         }
 
     }

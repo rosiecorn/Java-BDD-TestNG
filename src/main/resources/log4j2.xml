@@ -4,7 +4,7 @@
 <Property name="logpath">target\logs</Property>
 </Properties>
 <Appenders>
-     <RollingFile name="fileLogger" fileName="${logpath}/FirstLogging.log" filePattern="${logpath}/Logging_%d{yyyyMMddHHmmss}.log">
+     <RollingFile name="fileLogger" fileName="${logpath}/Logging.log" filePattern="${logpath}/archive/Logging_%d{yyyyMMddHHmmss}.log">
     <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
         <Policies>
             <OnStartupTriggeringPolicy />

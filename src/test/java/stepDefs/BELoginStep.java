@@ -7,6 +7,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
 import pages.BELogin;
 import pages.FELogin;
 
@@ -20,9 +21,12 @@ public class BELoginStep {
 
     private Logger log = LogManager.getLogger(BELoginStep.class);
 
+
+
     @Given("^Login BackEnd Url$")
     public void loginBackEndUrl() {
        login.openPage();
+
     }
 
     @And("^Provide user name \"([^\"]*)\" and pass \"([^\"]*)\"$")
@@ -34,6 +38,7 @@ public class BELoginStep {
     @And("^Click BackEnd Login button$")
     public void click_BackEnd_Login_button(){
        login.click();
+
     }
 
     @Then("^BackEnd Login successfully$")

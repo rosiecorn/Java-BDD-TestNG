@@ -1,10 +1,13 @@
 @FrondEnd
-Feature: FE001 - Verify Login functionality
+Feature: FrontEnd - Login
+
+As a user, I want to login sucessfully on FrontEnd site
 
 #-------------------------------------------------------------------------------
-  @Priority=1 @ValidLogin
-  Scenario: Verify that user could login with valid user name and pass
-    Given Login Url
-    And   Give user name "user@phptravels.com" and pass "demouser"
-    And   Click Login button
-    Then  Login successfully
+
+  Scenario: FE001-Login - Login sucessful
+    Given User on the Front-End Login Page
+    When  User log in
+              |user@phptravels.com|demouser|
+    Then  User should see main page display
+

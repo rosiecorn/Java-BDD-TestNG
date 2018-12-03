@@ -1,7 +1,4 @@
 package assertion;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
@@ -15,26 +12,19 @@ public class TestMethodListener implements IInvokedMethodListener {
 
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 
+            //System.out.println(" Running: " + method.getTestMethod() + method.getTestResult());
+            if(TestMethodErrorBuffer.get()!=null ){
 
-       // Logger log = LogManager.getLogger(TestMethodListener.class);
-
-        //log.info("Hong Testing...................");
-
-       // if(method.isTestMethod()){
-
-            if(TestMethodErrorBuffer.get()!=null){
                 throw new RuntimeException("Stale error buffer detected!");
             }
 
             TestMethodErrorBuffer.set(new ArrayList<Throwable>()); // each test method will have its own error buffer
-        //}
 
     }
 
 
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
 
-       // if(method.isTestMethod()){
 
             List<Throwable> lThrowable = TestMethodErrorBuffer.get();
 
@@ -76,7 +66,7 @@ public class TestMethodListener implements IInvokedMethodListener {
                 }
 
             }
-
+            //System.out.println(" Running: " + method.getTestMethod() + method.getTestResult());
             TestMethodErrorBuffer.remove(); // remove stale
 
        // }

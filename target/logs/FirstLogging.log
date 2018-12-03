@@ -1,9 +1,0 @@
-15:19:10 [main] INFO  assertion.TestMethodListener - Hong Testing...................
-15:19:16 [main] INFO  runner.TestRunner -  ================================Start Cucumber Suite Class=====================================================
-15:19:16 [main] INFO  assertion.TestMethodListener - Hong Testing...................
-15:19:16 [main] INFO  runner.TestRunner - ------Start Scenario: Verify that user could login with valid user name and pass ---------------------
-15:19:22 [main] ERROR assertion.Asserts - [Assert Fail] - error expected [2] but found [1]
-15:19:22 [main] ERROR assertion.Asserts - [Assert Fail] - error expected [3] but found [1]
-15:19:26 [main] INFO  runner.TestRunner - ------End Scenario: Verify that user could login with valid user name and pass -----------------------
-15:19:26 [main] INFO  assertion.TestMethodListener - Hong Testing...................
-15:19:27 [main] INFO  runner.TestRunner - =================================End Cucumber Suite Class========================================================
