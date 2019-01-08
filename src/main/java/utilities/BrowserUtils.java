@@ -35,6 +35,8 @@ public class BrowserUtils {
         WebDriverWait exists = new WebDriverWait(driver, timer);
 
         exists.until(ExpectedConditions.refreshed(ExpectedConditions.titleContains(title)));
+
+
     }
 
     /**
@@ -114,12 +116,11 @@ public class BrowserUtils {
         return (Boolean) js.executeScript("return jQuery.active == 0");
     }
 
-    public static void scrollDown(WebDriver driver) {
+    public static void scrollDown() {
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getInstance().getDriver();
         // This  will scroll down the page by  1000 pixel vertical
         js.executeScript("window.scrollBy(0,1000)");
     }
-
 
 }

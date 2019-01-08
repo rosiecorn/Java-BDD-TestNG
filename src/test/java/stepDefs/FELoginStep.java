@@ -1,16 +1,14 @@
 package stepDefs;
 
-import assertion.Asserts;
-import assertion.TestMethodListener;
+
 import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.annotations.Listeners;
+
 import pages.FELogin;
 
 import java.util.List;
@@ -28,7 +26,7 @@ public class FELoginStep {
 
     @Given("^User on the Front-End Login Page$")
     public void userOnTheFrontEndLoginPage() {
-        login.openPage();
+        login.openLoginPage();
         login.verifLoginPage();
     }
 
@@ -46,9 +44,15 @@ public class FELoginStep {
         login.verifyMainPage();
     }
 
-//    @Then("^ddddd$")
-//    public void ddddd() throws Throwable {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new PendingException();
-//    }
+    @Given("^Open Login Page$")
+    public void openLoginPage() {
+        login.landingHomePage();
+    }
+
+    @Given("^PhpTravel User home page$")
+    public void phpTravelUserHomePage() {
+        login.landingHomePage();
+    }
+
+
 }

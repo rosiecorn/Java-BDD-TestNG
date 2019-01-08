@@ -1,12 +1,8 @@
 package assertion;
 
-import cucumber.api.Scenario;
-import drivers.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+
 import org.testng.Assert;
 
 public class Asserts {
@@ -55,6 +51,24 @@ public class Asserts {
             }
         }
 
+    public static void verifyTrue(boolean condition, String message) {
+        try{
+            Assert.assertTrue(condition, message);
+        }catch(AssertionError e){
+            log.error("[Assert Fail] - " + e.getMessage());
+            addToErrorBuffer(e);
+        }
+    }
+
+    public static void verifyTrue(boolean condition) {
+        try{
+            Assert.assertTrue(condition, "");
+        }catch(AssertionError e){
+            log.error("[Assert Fail] - " + e.getMessage());
+            addToErrorBuffer(e);
+        }
+    }
+
         public static void verifyNotEquals(Object actual1, Object actual2) {
             try{
                 Assert.assertNotEquals(actual1,actual2,"");
@@ -90,6 +104,7 @@ public class Asserts {
         }
 
     }
+
 
     public static void verifyAll() {
 

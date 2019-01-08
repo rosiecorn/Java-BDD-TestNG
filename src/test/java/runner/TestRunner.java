@@ -1,6 +1,6 @@
 package runner;
 
-import assertion.TestMethodErrorBuffer;
+
 import assertion.TestMethodListener;
 import cucumber.api.CucumberOptions;
 import cucumber.api.Scenario;
@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
 import cucumber.api.testng.PickleEventWrapper;
-
 import static utilities.ScreenShot.takeScreenshot;
 
 @CucumberOptions(features = { "src/test/resources/features"}
@@ -20,14 +19,14 @@ import static utilities.ScreenShot.takeScreenshot;
         , plugin = {"pretty:target/cucumber-reports/cucumber.txt"
         ,"html:target/cucumber-reports"
         ,"json:target/cucumber.json"}
-        , tags = {"@FrondEnd,@BackEnd"}
+        , tags = {"@BackEnd"}
 )
 
 @Listeners(TestMethodListener.class)
 public class TestRunner {
 
     private TestNGCucumberRunner testNGCucumberRunner;
-    private Logger log = LogManager.getLogger(TestRunner.class);
+    public Logger log = LogManager.getLogger(TestRunner.class);
 
 
     @BeforeClass(alwaysRun = true)
@@ -53,7 +52,7 @@ public class TestRunner {
                 e.printStackTrace();
             }
         }
-        log.info("------End Scenario: " + scenario.getName() + " -----------------------");
+        log.info("------End Scenario: " + scenario.getName() + " was " + scenario.getStatus() + " -----------------------");
     }
 
     @Test(groups = "cucumber", description = "Runs Cucumber Scenarios", dataProvider = "scenarios")

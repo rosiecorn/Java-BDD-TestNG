@@ -17,7 +17,7 @@ import org.testng.annotations.*;
         ,glue = {"stepDefs", "bases"}
         , plugin = {"pretty:target/cucumber-reports/cucumber.txt"
         ,"html:target/cucumber-reports","json:target/cucumber.json"}
-        , tags = {"@FrondEnd,@BackEnd"}
+        , tags = {"@Tours,@Login,@Car"}
 )
 
 

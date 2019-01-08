@@ -1,19 +1,19 @@
 package bases;
 
 import drivers.Driver;
-import elements.controller.*;
 import elements.controllerImpl.Element;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import utilities.BrowserUtils;
 
+import runner.TestRunner;
+import utilities.BrowserUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import static utilities.Contants.SECOND_TIME_OUT;
@@ -21,31 +21,15 @@ import static utilities.Contants.SECOND_TIME_OUT;
 public class BasePage {
 
     public WebDriver driver = null;
-
-    private IElement element;
-
-    private ITextBox textBox;
-
-    private IRadioButton radio;
-
-    private IButton button;
-
-    private ITable table;
-
-    private List<WebElement> elements;
+    private WebElement elementnull =null;
+    public Logger log = LogManager.getLogger(TestRunner.class);
 
     WebDriverWait wait;
 
-
     public BasePage() {
 
-
-        if (this.driver == null) {
             this.driver = Driver.getInstance().getDriver();
-        }
-        wait = new WebDriverWait(driver, SECOND_TIME_OUT);
-
-
+            wait = new WebDriverWait(driver, SECOND_TIME_OUT);
     }
 
 
@@ -55,33 +39,56 @@ public class BasePage {
      * * @locators locator
      */
 
+
     public <T> T getElement(Class<T> type, By locators) {
+
         try {
 
-            // WebDriver driver =  Driver.getInstance().getDriver();
             Constructor<T> constructor = type.getDeclaredConstructor(WebElement.class);
-
             return constructor.newInstance(wait.until(ExpectedConditions.visibilityOf(driver.findElement(locators))));
 
-
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+
+            log.warn(e.getMessage());
+            try {
+                return type.getDeclaredConstructor(WebElement.class).newInstance(elementnull);
+            }
+            catch(Exception ex)
+            {
+               // log.warn(ex);
+                return  null;
+            }
         }
     }
 
+    /**
+     *
+     * @param type
+     * @param element
+     * @param <T>
+     * @return
+     */
     public <T> T getElement(Class<T> type, WebElement element) {
-        try {
 
+
+        try {
 
             Constructor<T> constructor = type.getDeclaredConstructor(WebElement.class);
 
-            return constructor.newInstance(wait.until(ExpectedConditions.visibilityOf(element)));
+            return constructor.newInstance((element));
 
 
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            log.warn(e.getMessage());
+
+            try {
+                return type.getDeclaredConstructor(WebElement.class).newInstance(elementnull);
+            }
+            catch(Exception ex)
+            {
+                log.warn(ex.getMessage());
+                return  null;
+            }
         }
     }
 
@@ -93,11 +100,17 @@ public class BasePage {
 
     public <T> List<T> getListElement(By locators) {
 
-        List<T> elements = (List<T>) getElement(Element.class, locators).findElements(locators);
-
-        return elements;
-
+        try
+        {
+            List<T> elements = (List<T>) getElement(Element.class, locators).findElements(locators);
+            return elements;
+        }
+         catch (Exception e) {
+             log.warn(e.getMessage());
+             return null;
+        }
     }
+
 
     /**
      * getTitle - method to return the title of the current page

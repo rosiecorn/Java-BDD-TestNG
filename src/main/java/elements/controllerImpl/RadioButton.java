@@ -5,12 +5,12 @@ import org.openqa.selenium.WebElement;
 
 public class RadioButton extends Element implements IRadioButton {
 
-    public RadioButton(WebElement element) {
+   public RadioButton(WebElement element) {
         super(element);
     }
 
 
-    public void toggle() {
+   public void toggle() {
         getWrappedElement().click();
     }
 
@@ -20,7 +20,6 @@ public class RadioButton extends Element implements IRadioButton {
             toggle();
         }
     }
-
 
     public void unSelect() {
         if (getWrappedElement().isSelected()) {

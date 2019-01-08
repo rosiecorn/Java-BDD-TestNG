@@ -1,19 +1,14 @@
 package pages;
 
 import assertion.Asserts;
-import assertion.TestMethodErrorBuffer;
-import assertion.TestMethodListener;
-import assertion.VerificationError;
 import bases.BasePage;
-import drivers.Driver;
 import elements.controllerImpl.Button;
 import elements.controllerImpl.Element;
 import elements.controllerImpl.TextBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.testng.Assert;
-import org.testng.annotations.Listeners;
+
 
 import  static utilities.TestUtils.*;
 
@@ -31,8 +26,6 @@ public class FELogin extends BasePage {
     private final By lblCurrentDate = By.xpath("//div[contains(@class,'col-md-6 go-left RTL')]//span");
     private final String strLblLeftMenuMainPage = "//div[contains(@class,'col-md-1 offset-0')]/ul[contains(@class,'nav profile-tabs')]/li[@@@]";
 
-
-
     public void enterUserName(String userName) {
         getElement(TextBox.class, txtUername).clearAndSetText(userName);
     }
@@ -45,14 +38,19 @@ public class FELogin extends BasePage {
         getElement(Button.class, btnLogin).clickAndWait();
     }
 
-    public void openPage() {
+    public void openLoginPage() {
 
-        openPage(url);
+        landingHomePage();
         getElement(Element.class, ddlMyAccount).click();
         getElement(Element.class, lblLogin).click();
 
     }
 
+
+    public void landingHomePage()
+    {
+        openPage(url);
+    }
     public void verifyMainPage(){
 
         String bookings = getElement(Element.class,getXpath(strLblLeftMenuMainPage,"@@@","1")).getText().trim();
@@ -76,6 +74,7 @@ public class FELogin extends BasePage {
 
         Asserts.verifyEquals(getTitle(), "Login");
         Asserts.verifyEquals(getCurrentURL(), "https://www.phptravels.net/login");
+
         Asserts.verifyAll();
     }
 }

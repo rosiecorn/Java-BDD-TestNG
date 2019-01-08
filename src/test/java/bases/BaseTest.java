@@ -20,7 +20,6 @@ public class BaseTest {
 
     }
     public static void closeDriver () {
-        System.out.println("Closing web driver");
         Driver.getInstance().closeDriver();
 
     }
